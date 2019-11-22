@@ -14,7 +14,7 @@
 
         if (count($results) > 0) {
             $_SESSION["user"] = $results[0];
-            if ($_GET["from"]) {
+            if (isset($_GET["from"])) {
                 header("Refresh: 0; URL=/{$_GET['from']}.php");
             } else {
                 header("Refresh: 0; URL=/");
