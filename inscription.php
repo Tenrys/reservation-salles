@@ -2,7 +2,7 @@
     session_start();
 
     if (isset($_SESSION["user"])) {
-        header("Refresh: 0; URL=/");
+        header("Location: index.php");
         die;
     }
 
@@ -22,7 +22,8 @@
                 $request = "INSERT INTO utilisateurs (login, password) VALUES (?, ?);";
                 try {
                     $stmt = $db->prepare($request);
-                    $stmt->bind_param("ss", $login, $password);
+                    $hashed = password_hash($password, PASSWORD_DEFAULT);
+                    $stmt->bind_param("ss", $login, $hashed);
                     $success = $stmt->execute();
                 } catch (Exception $e) {
                     echo "Exception reçue: {$e->getMessage()}";
@@ -51,7 +52,7 @@
     <body>
         <header>
             <h1>Réservation de salles</h1>
-            <a href="/">Retour</a>
+            <a href="index.php">Retour</a>
         </header>
         <main id="inscription">
             <h2>Inscription</h2>

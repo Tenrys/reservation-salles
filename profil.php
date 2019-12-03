@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION["user"])) {
-        header("Refresh: 0; URL=/");
+        header("Location: index.php");
         die;
     }
 
@@ -61,7 +61,7 @@
     <body>
         <header>
             <h1>Réservation de salles</h1>
-            <a href="/">Retour</a>
+            <a href="index.php">Retour</a>
         </header>
         <main id="profil">
             <h2>Profil</h2>

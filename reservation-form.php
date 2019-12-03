@@ -4,12 +4,12 @@
     session_start();
 
     if (!isset($_SESSION["user"])) {
-        header("Refresh: 0; URL=/");
+        header("Location: index.php");
         die;
     }
 
     if (!isset($_GET["debut"])) {
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
 
@@ -19,12 +19,12 @@
     // On regarde si quelqu'un essaie de faire n'importe quoi avec le temps...
     $debutTemps = strtotime($debut);
     if ($debutTemps < strtotime("monday this week 00:00") || $debutTemps > strtotime("friday this week 23:59")) {
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
     $debutInfo = getdate($debutTemps);
     if ($debutInfo["hours"] < 8 || $debutInfo["hours"] > 19 || $debutInfo["seconds"] != 0 || $debutInfo["minutes"] != 0) {
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
 
@@ -43,7 +43,7 @@
 
     if (count($result) > 0) {
         $_SESSION["error"] = "Il y a déjà un évenement prévu pendant cette période";
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
 
@@ -53,7 +53,7 @@
         $stmt->bind_param("ssssi", $titre, $description, $debutDatetime, $finDatetime, $_SESSION["user"]["id"]);
         $stmt->execute();
 
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
 ?>
@@ -71,7 +71,7 @@
 <body>
     <header>
         <h1>Réservation de salles</h1>
-        <a href="/planning.php">Retour</a>
+        <a href="planning.php">Retour</a>
     </header>
     <main id="reservation-form">
         <form method="post">

@@ -4,12 +4,12 @@
     if (isset($_SESSION["user"])) {
         extract($_SESSION["user"]);
     } else {
-        header("Refresh: 0; URL=/connexion.php?from=planning");
+        header("Location: connexion.php?from=planning");
         die;
     }
 
     if (!isset($_GET["id"])) {
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
 
@@ -22,7 +22,7 @@
     $events = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
     if (count($events) < 1) {
-        header("Refresh: 0; URL=/planning.php");
+        header("Location: planning.php");
         die;
     }
 
@@ -42,7 +42,7 @@
 <body>
     <header>
         <h1>Réservation de salles</h1>
-        <a href="/planning.php">Retour</a>
+        <a href="planning.php">Retour</a>
     </header>
     <main id="reservation">
         <p><strong>Titre</strong>: <?= $event["titre"] ?></p>

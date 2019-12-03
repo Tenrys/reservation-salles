@@ -5,5 +5,5 @@
         unset($_SESSION["user"]);
     }
 
-    header("Refresh: 0; URL=/");
+    header("Location: index.php");
 ?>

@@ -67,7 +67,7 @@
     <body>
         <header>
             <h1>Réservation de salles</h1>
-            <a href="/">Retour</a>
+            <a href="index.php">Retour</a>
         </header>
         <main id="planning">
             <h2>Voici les événements pour cette semaine... Vous pouvez en planifier un si vous êtes connecté.</h2>

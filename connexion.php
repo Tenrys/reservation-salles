@@ -1,23 +1,28 @@
 <?php
     session_start();
 
+    if (isset($_SESSION["user"])) {
+        header("Location: index.php");
+        die;
+    }
+
     if (count($_POST) > 0) {
         extract($_POST);
 
         $db = new mysqli("localhost", "root", "", "reservationsalles");
 
-        $request = "SELECT * FROM utilisateurs WHERE (login = ? AND password = ?);";
+        $request = "SELECT * FROM utilisateurs WHERE login = ?;";
         $stmt = $db->prepare($request);
-        $stmt->bind_param("ss", $login, $password);
+        $stmt->bind_param("s", $login);
         $stmt->execute();
         $results = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-        if (count($results) > 0) {
+        if (count($results) > 0 && password_verify($password, $results[0]["password"])) {
             $_SESSION["user"] = $results[0];
             if (isset($_GET["from"])) {
-                header("Refresh: 0; URL=/{$_GET['from']}.php");
+                header("Location: {$_GET['from']}.php");
             } else {
-                header("Refresh: 0; URL=/");
+                header("Location: index.php");
             }
             die;
         } else {
@@ -40,7 +45,7 @@
     <body>
         <header>
             <h1>Réservation de salles</h1>
-            <a href="/">Retour</a>
+            <a href="index.php">Retour</a>
         </header>
         <main id="connexion">
             <h2>Connexion</h2>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 22, 2019 at 04:29 PM
+-- Generation Time: Dec 03, 2019 at 10:34 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -66,15 +66,15 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `login`, `password`) VALUES
-(1, 'tenrys', 'admin'),
-(2, 'admin', 'admin');
+(3, 'abcdef', '$2y$10$5wZZLSJx0lgxiOSbktucYeueBWETR51JXezfy4cbp9Let2gEHtWXy'),
+(4, 'test123', '$2y$10$41Z/t7acZeDwhELlEB1/5OeTQaTBBfJl7R3TJVBOzzTwoxxb2cgpK');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
